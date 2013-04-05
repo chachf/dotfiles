@@ -1,13 +1,7 @@
-" Mappings lista de presenca:
-"Para colocar um X na 45-esima posicao e voltar
-":map s 45\|rX0 
-"Para enxergar a linha do cursor:
-":set cursorline
-highlight CursorLine ctermfg=red
+"highlight CursorLine ctermfg=red
 
 "Para fixar a cor do texto
 "highlight Normal ctermfg=red
-
 
 " GENERAL:
 
@@ -15,7 +9,7 @@ colorscheme vitamins
 "colorscheme desert 
 
 "Pour que le curseur soit toujours au milieu de la page:
-set scrolloff=30
+"set scrolloff=30
 
 "Pour voir la ligne du curseur:
 set cursorline
@@ -24,9 +18,6 @@ set cursorline
 set wrapmargin=10
 
 nnoremap :W :w
-
-"me coupe une ligne trop longue a 80 caracteres:
-"nnoremap g 75\|Bi
 
 "NAVIGATION:
 
@@ -51,7 +42,6 @@ map  <F12> :set hls!<CR>
 
 set wrapscan
 
-
 "Bien pour python:
 set autoindent
 
@@ -62,8 +52,9 @@ set autoindent
 
 let mapleader = "-"
 
-"resourcer en mode normal
-nnoremap <leader>sv :source $MYVIMRC
+"resourcer en mode normal:
+nnoremap <leader>sv :source ~/.vimrc<ENTER>
+"editer mon vimrc:
 nnoremap <leader>ev :split ~/.vimrc<ENTER>
 
 nnoremap [1;5A :resize +5
@@ -81,19 +72,16 @@ nnoremap <space> i<space><esc>h
 "effacer un mot en appuyant sur delete (meme si je ne suis qu'au milieu)
 nnoremap [3~ bdw 
 
-"effacer le dernier caractere de la ligne
-nnoremap <leader>d ml$x`l
-
+"pour commenter en mode visuel mais en gardant la selection:
 vnoremap > >gv
 vnoremap < <gv
-
 
 "---- COMMENTAIRES -----:
 "em bash,
 autocmd filetype bash nnoremap OR :s/^/#/<c-m>
 autocmd filetype bash vnoremap OR :s/^/#/<c-m>gv
 
-"em vimrc, MARCHE PAS
+"em vimrc,
 autocmd filetype vim nnoremap OR :s/^/"/<c-m>
 autocmd filetype vim nnoremap OS :s/^"//<c-m>
 autocmd filetype vim vnoremap OR :s/^/"/<c-m>gv
@@ -105,29 +93,32 @@ autocmd filetype tex vnoremap OS :s/^%//<c-m>gv
 autocmd filetype tex nnoremap OR :s/^/%/<c-m>
 autocmd filetype tex nnoremap OS :s/^%//<c-m>
 
-
 "En Python, 
 autocmd FileType python vnoremap OR :s/^/#/<C-M>gv
 autocmd FileType python vnoremap OS :s/^#//<C-M>gv
 autocmd FileType python nnoremap OR :s/^/#/<C-M>
 autocmd FileType python nnoremap OS :s/^#//<C-M>
 
-"----- Mappings LATEX --------
-
+"----- LATEX --------
 "CA SERAIT BIEN DE CREER DES GROUPES pour les autocommands
 
-"Compiler
+"Compiler Sm-book.tex:
 "nnoremap <C-L> :w<ENTER>:!pdflatex --shell-escape SM-book.tex <ENTER>
+"Compiler le fichier actuel:
 nnoremap <C-L> :w<ENTER>:!pdflatex % <ENTER>
 
-"EMPHASIZER
+"EMPHASIZER en mode VISUEL
 vnoremap e <ESC>`>a}<ESC>`<i\emph{<ESC>
 
+"COPIER-COLLER
 "copier ce qui se trouve dans le $...$ le plus proche:
 autocmd filetype tex nnoremap Y mof$lyt$`o
 
-"commencer un environnement
-autocmd filetype tex nnoremap <C-B> i\begin{
+"copier ce qui se trouve dans le \label{...} de la ligne courante, 
+"et le placer dans le registre o:
+autocmd filetype tex nnoremap  mo/label<ENTER>e2l"oyi{`o
+"coller le contenu du registre o dans un \eqref{...}:
+autocmd filetype tex inoremap  \eqref{}<ESC>"oP  
 
 "Para completar um ambiente (tipo fechar \begin{equation}):
 " En mode inserer: je suis genre a \begin{equation_, et je 
@@ -136,60 +127,19 @@ autocmd filetype tex inoremap <C-E> }yT{oo\end{pa}2kA\label{}i
 " En mode normal, je veux juste fermer un ambiente:
 autocmd filetype tex nnoremap <C-E> i\end<ESC>mz?\\begin<ENTER>2wy%`zp 
 
-" EQUATIONS:
+"EQUATIONS:
+
+"commencer un environnement
+autocmd filetype tex nnoremap <C-B> i\begin{
 
 iabbrev eqn \[<ENTER><ENTER>\]<ESC>ki<BS>
 iabbrev Eqn \begin{equation}\label{}<ENTER><ENTER>\end{equation}<ESC>kk$i<BS>
 iabbrev algn \begin{align*}\end{align*}ki
 
-"... et em mode inserer...
-iabbrev ee <cr>\[<cr><cr>\]ki
-"iabbrev EE <cr>\begin{equation}\label{}<cr><cr>\end{equation}kk$hhi
-
-"Para trocar um ambiente \[... em \begin{equation}...
-" (faut se mettre quelque part a l'interieur des \[...\])
-nnoremap ** /\\]<enter>2xa\end{equation}<esc>?\\[<enter>2xi\begin{equation}\label{}<esc>i
-
-"Para trocar um $...$ por um \[...\] en mode normal:
-nnoremap && F$xi<ENTER>\[<ENTER><ESC>f$s<ENTER>\]<ESC>k
-
-"pour mettre un emph
-nnoremap <leader>em mybi\emph{ea}`yw
-
-"pour mettre un grasA
-nnoremap <leader>gr bi\grasA{ea}
-
-"pour creer un label
-nnoremap <leader>l a\label{}<esc>i
-
-"pour ouvrir un align:
-nnoremap <leader>a O\begin{align*}\end{align*}ki
-
-"pour ouvrir une section:
-nnoremap <leader>se O\section{}i
-nnoremap <leader>sse O\subsection{}i
-
-"pour ouvrir une preuve
-nnoremap <leader>p O\begin{proof}\end{proof}ki
-
-"pour ouvrir un exercice
-nnoremap <leader>ex i\begin{exercise}\end{exercise}<esc>ki
-
-"pour ouvrir une solution
-nnoremap <leader>so i\begin{sol}\end{sol}ki
-
-"pour ouvrir un enumerate
-nnoremap <leader>en i\begin{enumerate}\end{enumerate}ki\item
-
-"pour mettre un item
-nnoremap <leader>it i\item 
-
-"Para fazer um FOLD com a imagem na qual o cursor esta:
-nnoremap [20~ ?begin{tikzpicture}zf/end{tikzpicture}
-"OBS: le defaut est que le /end{tikzpicture} est enregistre comme
-" le "search" courant, et donc si ensuite 
-"jútilise les touches n et N, il me
-"recherche un "end{tikzpicture}"...
+"Trocar um \[...\] por \begin{equation}...\end{equation}:
+autocmd filetype tex nnoremap ** /\\]<enter>2xa\end{equation}<esc>?\\[<enter>2xi\begin{equation}\label{}<esc>i
+"Trocar um $...$ por um \[...\]:
+autocmd filetype tex nnoremap && F$xi<ENTER>\[<ENTER><ESC>f$s<ENTER>\]<ESC>k
 
 " Les fonctions qui me stockent la session quand je ferme vim:
 autocmd VimEnter * call LoadSession()
