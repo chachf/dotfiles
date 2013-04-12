@@ -103,9 +103,9 @@ autocmd FileType python nnoremap OS :s/^#//<C-M>
 "CA SERAIT BIEN DE CREER DES GROUPES pour les autocommands
 
 "Compiler Sm-book.tex:
-"nnoremap <C-L> :w<ENTER>:!pdflatex --shell-escape SM-book.tex <ENTER>
+nnoremap <C-L> :w<ENTER>:!pdflatex --shell-escape SM-book.tex <ENTER>
 "Compiler le fichier actuel:
-nnoremap <C-L> :w<ENTER>:!pdflatex % <ENTER>
+"nnoremap <C-L> :w<ENTER>:!pdflatex % <ENTER>
 
 "EMPHASIZER en mode VISUEL
 vnoremap e <ESC>`>a}<ESC>`<i\emph{<ESC>
@@ -118,7 +118,7 @@ autocmd filetype tex nnoremap Y mof$lyt$`o
 "et le placer dans le registre o:
 autocmd filetype tex nnoremap  mo/label<ENTER>e2l"oyi{`o
 "coller le contenu du registre o dans un \eqref{...}:
-autocmd filetype tex inoremap  \eqref{}<ESC>"oP  
+autocmd filetype tex inoremap  {}<ESC>"oP  
 
 "Para completar um ambiente (tipo fechar \begin{equation}):
 " En mode inserer: je suis genre a \begin{equation_, et je 
@@ -170,7 +170,7 @@ autocmd FileWritePre *.tex mark s|call MyLastMod()|'s
 fun! MyLastMod()
 let currenttime = strftime("%c")
 "exe "1Gisalut"
-exe "1,10s/modification: .*/modification: " . currenttime
+exe "1,10s/modification:/modification: " . currenttime
 "ici faudrait inserer un teste qui regarde si cette ligne existe.
 "si elle n'existe pas, la creer.
 "1GiLast Modification
