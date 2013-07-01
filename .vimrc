@@ -5,6 +5,7 @@
 
 " GENERAL:
 
+"syntax on
 colorscheme vitamins 
 "colorscheme desert 
 
@@ -102,10 +103,10 @@ autocmd FileType python nnoremap OS :s/^#//<C-M>
 "----- LATEX --------
 "CA SERAIT BIEN DE CREER DES GROUPES pour les autocommands
 
-"Compiler Sm-book.tex:
-nnoremap <C-L> :w<ENTER>:!pdflatex --shell-escape SM-book.tex <ENTER>
+"Compiler SM-book.tex:
+"nnoremap <C-L> :w<ENTER>:!pdflatex --shell-escape SM-book.tex <ENTER>
 "Compiler le fichier actuel:
-"nnoremap <C-L> :w<ENTER>:!pdflatex % <ENTER>
+nnoremap <C-L> :w<ENTER>:!pdflatex % <ENTER>
 
 "EMPHASIZER en mode VISUEL
 vnoremap e <ESC>`>a}<ESC>`<i\emph{<ESC>
@@ -123,7 +124,7 @@ autocmd filetype tex inoremap  {}<ESC>"oP
 "Para completar um ambiente (tipo fechar \begin{equation}):
 " En mode inserer: je suis genre a \begin{equation_, et je 
 " veux completer:
-autocmd filetype tex inoremap <C-E> }yT{oo\end{pa}2kA\label{}i
+autocmd filetype tex inoremap <C-E> }yT{oo\end{pa}2kAji
 " En mode normal, je veux juste fermer un ambiente:
 autocmd filetype tex nnoremap <C-E> i\end<ESC>mz?\\begin<ENTER>2wy%`zp 
 
