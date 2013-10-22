@@ -1,3 +1,4 @@
+
 "highlight CursorLine ctermfg=red
 
 "Para fixar a cor do texto
@@ -28,6 +29,11 @@ nnoremap OA 5k
 nnoremap OB 5j
 nnoremap OD 5h
 nnoremap OC 5l
+
+"NAVIGATION ENTRE BUFFERS:
+
+nnoremap [ :w:bprev
+nnoremap ] :w:bnext
 
 "Enable MOUSE
 set mouse=a
@@ -104,9 +110,9 @@ autocmd FileType python nnoremap OS :s/^#//<C-M>
 "CA SERAIT BIEN DE CREER DES GROUPES pour les autocommands
 
 "Compiler SM-book.tex:
-"nnoremap <C-L> :w<ENTER>:!pdflatex --shell-escape SM-book.tex <ENTER>
+nnoremap <C-L> :w<ENTER>:!pdflatex --shell-escape SM-book.tex <ENTER>
 "Compiler le fichier actuel:
-nnoremap <C-L> :w<ENTER>:!pdflatex % <ENTER>
+"nnoremap <C-L> :w<ENTER>:!pdflatex % <ENTER>
 
 "EMPHASIZER en mode VISUEL
 vnoremap e <ESC>`>a}<ESC>`<i\emph{<ESC>
