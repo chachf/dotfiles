@@ -1,4 +1,5 @@
 
+
 "highlight CursorLine ctermfg=red
 
 "Para fixar a cor do texto
@@ -43,9 +44,12 @@ set number
 "numerotation relative a ma position actuelle:
 "set relativenumber
 
+" SEARCH:
 set incsearch
 "set hlsearch
 map  <F12> :set hls!<CR>
+nnoremap <SPACE> /
+nnoremap <SPACE><SPACE> ?
 
 set wrapscan
 
@@ -72,9 +76,6 @@ inoremap kj <esc>
 
 "remapper enter pour le mode normal:
 nnoremap  eBi
-
-"remapper space pour le mode normal:
-nnoremap <space> i<space><esc>h  
 
 "effacer un mot en appuyant sur delete (meme si je ne suis qu'au milieu)
 nnoremap [3~ bdw 
