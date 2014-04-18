@@ -1,10 +1,9 @@
 " GENERAL:
 
-"colorscheme vitamins 
-colorscheme desert 
+colorscheme vitamins 
+"colorscheme desert 
 
 "set cursorline
-=======
 "highlight CursorLine ctermfg=red
 
 "Para fixar a cor do texto
@@ -33,7 +32,6 @@ nnoremap :W :w
 "NAVIGATION:
 
 
-=======
 "NAVIGATION:
 
 nnoremap k gk
@@ -43,7 +41,6 @@ nnoremap OB 5j
 nnoremap OD 5h
 nnoremap OC 5l
 
-=======
 "NAVIGATION ENTRE BUFFERS:
 
 nnoremap [ :w:bprev
@@ -57,14 +54,12 @@ set number
 "numerotation relative a ma position actuelle:
 "set relativenumber
 
-<<<<<<< HEAD
 "Pour que le curseur soit toujours au milieu de la page:
 set scrolloff=10
 
 set incsearch
 "set hlsearch
 map  <F12> :set hls!<CR>
-=======
 " SEARCH:
 set incsearch
 "set hlsearch
@@ -138,7 +133,6 @@ autocmd filetype tex vnoremap OS :s/^%//<c-m>gv
 autocmd filetype tex nnoremap OR :s/^/%/<c-m>
 autocmd filetype tex nnoremap OS :s/^%//<c-m>
 
-=======
 "En Python, 
 autocmd FileType python vnoremap OR :s/^/#/<C-M>gv
 autocmd FileType python vnoremap OS :s/^#//<C-M>gv
@@ -194,8 +188,7 @@ autocmd filetype tex nnoremap <C-E> i\end<ESC>mz?\\begin<ENTER>2wy%`zp
 autocmd filetype tex nnoremap <C-B> i\begin{
 
 iabbrev eqn \[<ENTER><ENTER>\]<ESC>ki<BS>
-iabbrev Eqn
-\begin{equation}\label{}<ENTER><ENTER>\end{equation}<ESC>kk$i<BS>
+iabbrev Eqn \begin{equation}\label{}<ENTER><ENTER>\end{equation}<ESC>kk$i<BS>
 iabbrev algn \begin{align*}\end{align*}ki
 
 "Para trocar um ambiente \[... em \begin{equation}...
