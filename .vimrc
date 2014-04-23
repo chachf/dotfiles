@@ -1,4 +1,9 @@
+" GENERAL:
 
+"colorscheme vitamins 
+colorscheme desert 
+
+"set cursorline
 "highlight CursorLine ctermfg=red
 
 "Para fixar a cor do texto
@@ -20,6 +25,12 @@ set cursorline
 set wrapmargin=10
 
 nnoremap :W :w
+
+"me coupe une ligne trop longue a 80 caracteres:
+"nnoremap g 75\|Bi
+
+"NAVIGATION:
+
 
 "NAVIGATION:
 
@@ -47,9 +58,18 @@ set number
 "numerotation relative a ma position actuelle:
 "set relativenumber
 
+"Pour que le curseur soit toujours au milieu de la page:
+set scrolloff=10
+
 set incsearch
 "set hlsearch
 map  <F12> :set hls!<CR>
+" SEARCH:
+set incsearch
+"set hlsearch
+map  <F12> :set hls!<CR>
+nnoremap <SPACE> /
+nnoremap <SPACE><SPACE> ?
 
 set wrapscan
 
@@ -63,6 +83,8 @@ set autoindent
 
 let mapleader = "-"
 
+"resourcer en mode normal
+nnoremap <leader>sv :source $MYVIMRC
 "resourcer en mode normal:
 nnoremap <leader>sv :source ~/.vimrc<ENTER>
 "editer mon vimrc:
@@ -77,8 +99,15 @@ inoremap kj <esc>
 "remapper enter pour le mode normal:
 nnoremap  eBi
 
-"remapper space pour le mode normal:
-nnoremap <space> i<space><esc>h  
+"effacer un mot en appuyant sur delete (meme si je ne suis qu'au milieu)
+nnoremap [3~ bdw 
+
+"effacer le dernier caractere de la ligne
+nnoremap <leader>d ml$x`l
+
+vnoremap > >gv
+vnoremap < <gv
+
 
 "effacer un mot en appuyant sur delete (meme si je ne suis qu'au milieu)
 nnoremap [3~ bdw 
@@ -92,6 +121,7 @@ vnoremap < <gv
 autocmd filetype bash nnoremap OR :s/^/#/<c-m>
 autocmd filetype bash vnoremap OR :s/^/#/<c-m>gv
 
+"em vimrc, MARCHE PAS
 "em vimrc,
 autocmd filetype vim nnoremap OR :s/^/"/<c-m>
 autocmd filetype vim nnoremap OS :s/^"//<c-m>
@@ -110,8 +140,18 @@ autocmd FileType python vnoremap OS :s/^#//<C-M>gv
 autocmd FileType python nnoremap OR :s/^/#/<C-M>
 autocmd FileType python nnoremap OS :s/^#//<C-M>
 
-"----- LATEX --------
+"----- Mappings LATEX --------
+
 "CA SERAIT BIEN DE CREER DES GROUPES pour les autocommands
+
+"nnoremap <C-L> :w<ENTER>:!pdflatex % <ENTER>
+
+"copier ce qui se trouve dans le $...$ le plus proche:
+autocmd filetype tex nnoremap Y mof$lyt$`o
+
+"commencer un environnement
+autocmd filetype tex nnoremap <C-B> i\begin{
+"----- LATEX --------
 
 "Compiler SM-book.tex:
 nnoremap <C-L> :w<ENTER>:!pdflatex --shell-escape SM-book.tex <ENTER>
@@ -134,6 +174,11 @@ autocmd filetype tex inoremap  {}<ESC>"oP
 "Para completar um ambiente (tipo fechar \begin{equation}):
 " En mode inserer: je suis genre a \begin{equation_, et je 
 " veux completer:
+autocmd filetype tex inoremap <C-E> }yT{oo\end{pa}2kA\label{}i
+" En mode normal, je veux juste fermer un ambiente:
+autocmd filetype tex nnoremap <C-E> i\end<ESC>mz?\\begin<ENTER>2wy%`zp 
+
+" EQUATIONS:
 autocmd filetype tex inoremap <C-E> }yT{oo\end{pa}2kAji
 " En mode normal, je veux juste fermer un ambiente:
 autocmd filetype tex nnoremap <C-E> i\end<ESC>mz?\\begin<ENTER>2wy%`zp 
@@ -147,6 +192,43 @@ iabbrev eqn \[<ENTER><ENTER>\]<ESC>ki<BS>
 iabbrev Eqn \begin{equation}\label{}<ENTER><ENTER>\end{equation}<ESC>kk$i<BS>
 iabbrev algn \begin{align*}\end{align*}ki
 
+"Para trocar um ambiente \[... em \begin{equation}...
+" (faut se mettre quelque part a l'interieur des \[...\])
+nnoremap ** /\\]<enter>2xa\end{equation}<esc>?\\[<enter>2xi\begin{equation}\label{}<esc>i
+
+"Para trocar um $...$ por um \[...\] en mode normal:
+nnoremap && F$xi<ENTER>\[<ENTER><ESC>f$s<ENTER>\]<ESC>k
+
+"pour mettre un emph
+nnoremap <leader>em mybi\emph{ea}`yw
+
+"pour mettre un grasA
+nnoremap <leader>gr bi\grasA{ea}
+
+"pour creer un label
+nnoremap <leader>l a\label{}<esc>i
+
+"pour ouvrir un align:
+nnoremap <leader>a O\begin{align*}\end{align*}ki
+
+"pour ouvrir un exercice
+nnoremap <leader>ex i\begin{exercise}\end{exercise}<esc>ki
+
+"pour ouvrir une solution
+nnoremap <leader>so i\begin{sol}\end{sol}ki
+
+"pour ouvrir un enumerate
+nnoremap <leader>en i\begin{enumerate}\end{enumerate}ki\item
+
+"pour mettre un item
+nnoremap <leader>it i\item 
+
+"Para fazer um FOLD com a imagem na qual o cursor esta:
+nnoremap [20~ ?begin{tikzpicture}zf/end{tikzpicture}
+"OBS: le defaut est que le /end{tikzpicture} est enregistre comme
+" le "search" courant, et donc si ensuite 
+"jútilise les touches n et N, il me
+"recherche un "end{tikzpicture}"...
 "Trocar um \[...\] por \begin{equation}...\end{equation}:
 autocmd filetype tex nnoremap ** /\\]<enter>2xa\end{equation}<esc>?\\[<enter>2xi\begin{equation}\label{}<esc>i
 "Trocar um $...$ por um \[...\]:
@@ -181,6 +263,7 @@ autocmd FileWritePre *.tex mark s|call MyLastMod()|'s
 fun! MyLastMod()
 let currenttime = strftime("%c")
 "exe "1Gisalut"
+exe "1,10s/modification: .*/modification: " . currenttime
 exe "1,10s/modification:/modification: " . currenttime
 "ici faudrait inserer un teste qui regarde si cette ligne existe.
 "si elle n'existe pas, la creer.
