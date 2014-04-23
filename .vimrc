@@ -7,7 +7,7 @@
 " GENERAL:
 
 "syntax on
-colorscheme vitamins 
+"colorscheme vitamins 
 "colorscheme desert 
 
 "Pour que le curseur soit toujours au milieu de la page:
@@ -29,6 +29,10 @@ nnoremap OA 5k
 nnoremap OB 5j
 nnoremap OD 5h
 nnoremap OC 5l
+
+"SEARCH
+nnoremap <SPACE> /
+nnoremap <SPACE><SPACE> ?
 
 "NAVIGATION ENTRE BUFFERS:
 
