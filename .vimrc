@@ -1,7 +1,7 @@
 " GENERAL:
 
-"colorscheme vitamins 
-colorscheme desert 
+colorscheme vitamins 
+"colorscheme desert 
 
 "set cursorline
 "highlight CursorLine ctermfg=red
