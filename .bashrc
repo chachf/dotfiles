@@ -92,6 +92,7 @@ alias l='ls -CF'
 
 # pour aller directement dans git/SMbook:
 alias cdsm='cd ~/git/SMBook'
+alias cdpd='cd ~/Dropbox/puredata_db'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
