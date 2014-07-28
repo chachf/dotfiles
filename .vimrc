@@ -12,7 +12,7 @@ colorscheme vitamins
 " GENERAL:
 
 "syntax on
-colorscheme vitamins 
+"colorscheme vitamins 
 "colorscheme desert 
 
 "Pour que le curseur soit toujours au milieu de la page:
@@ -35,8 +35,8 @@ nnoremap OB 5j
 nnoremap OD 5h
 nnoremap OC 5l
 
-"JUMP over words:
-" A FAIRE
+nnoremap <SPACE> /
+nnoremap <SPACE><SPACE> ?
 
 "NAVIGATION ENTRE BUFFERS:
 
