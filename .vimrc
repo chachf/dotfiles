@@ -26,12 +26,6 @@ set wrapmargin=10
 
 nnoremap :W :w
 
-"me coupe une ligne trop longue a 80 caracteres:
-"nnoremap g 75\|Bi
-
-"NAVIGATION:
-
-
 "NAVIGATION:
 
 nnoremap k gk
@@ -41,10 +35,16 @@ nnoremap OB 5j
 nnoremap OD 5h
 nnoremap OC 5l
 
+"JUMP over words:
+" A FAIRE
+
 "NAVIGATION ENTRE BUFFERS:
 
 nnoremap [ :w:bprev
 nnoremap ] :w:bnext
+
+nnoremap <C-F1> :w:b1
+nnoremap <C-F2> :w:b2
 
 "Enable MOUSE
 set mouse=a
@@ -140,7 +140,12 @@ autocmd FileType python nnoremap OS :s/^#//<C-M>
 
 "CA SERAIT BIEN DE CREER DES GROUPES pour les autocommands
 
-"nnoremap <C-L> :w<ENTER>:!pdflatex % <ENTER>
+"Compiler SM-book.tex:
+"nnoremap <C-L> :w<ENTER>:!pdflatex --shell-escape SM-book.tex <ENTER>
+"Compiler SM-book.tex:
+"nnoremap <C-L> :w<ENTER>:!pdflatex Apostila.tex <ENTER>
+"Compiler le fichier actuel:
+nnoremap <C-L> :w<ENTER>:!pdflatex % <ENTER>
 
 "copier ce qui se trouve dans le $...$ le plus proche:
 autocmd filetype tex nnoremap Y mof$lyt$`o
@@ -149,10 +154,6 @@ autocmd filetype tex nnoremap Y mof$lyt$`o
 autocmd filetype tex nnoremap <C-B> i\begin{
 "----- LATEX --------
 
-"Compiler SM-book.tex:
-nnoremap <C-L> :w<ENTER>:!pdflatex --shell-escape SM-book.tex <ENTER>
-"Compiler le fichier actuel:
-"nnoremap <C-L> :w<ENTER>:!pdflatex % <ENTER>
 
 "EMPHASIZER en mode VISUEL
 vnoremap e <ESC>`>a}<ESC>`<i\emph{<ESC>
