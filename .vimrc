@@ -110,12 +110,16 @@ autocmd FileType python nnoremap OS :s/^#//<C-M>
 
 "CA SERAIT BIEN DE CREER DES GROUPES pour les autocommands
 
-"Compiler SM-book.tex:
-nnoremap <C-L> :w<ENTER>:!pdflatex --shell-escape SM-book.tex <ENTER>
-"Compiler Apostila.tex:
-"nnoremap <C-L> :w<ENTER>:!pdflatex Apostila.tex <ENTER>
-"Compiler le fichier actuel
-"noremap <C-L> :w<ENTER>:!pdflatex % <ENTER>
+"Pour configurer la compilation:
+" un truc qui commencait a marcher, en ligne de commande:
+" :execute "nnoremap <C-L> :nnoremap h D<enter>"
+" para SMbook:
+nnoremap <leader>sm execute 'nnoremap <C-L> :w<ENTER>:!pdflatex --shell-escape SM-book.tex <ENTER>'
+" execute 'mksession! $HOME/.vim/sessions/session.vim'
+" para Apostila:
+nnoremap <leader>ap :nnoremap <C-L> :w<ENTER>:!pdflatex Apostila.tex <ENTER>
+" para fichier actuel:
+nnoremap <leader>at :nnoremap <C-L> :w<ENTER>:!pdflatex % <ENTER>
 
 "copier ce qui se trouve dans le $...$ le plus proche:
 autocmd filetype tex nnoremap Y mof$lyt$`o
