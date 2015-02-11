@@ -11,12 +11,10 @@ colorscheme vitamins
 
 " GENERAL:
 
-"syntax on
-"colorscheme vitamins 
-"colorscheme desert 
+"remapper esc:
+inoremap kj <esc>
 
-"Pour que le curseur soit toujours au milieu de la page:
-"set scrolloff=30
+"syntax on
 
 "Pour voir la ligne du curseur:
 set cursorline
@@ -30,21 +28,24 @@ nnoremap :W :w
 
 nnoremap k gk
 nnoremap j gj
-nnoremap OA 5k
-nnoremap OB 5j
+nnoremap OA {
+nnoremap OB }
 nnoremap OD 5h
 nnoremap OC 5l
 
+"SEARCH:
+
 nnoremap <SPACE> /
 nnoremap <SPACE><SPACE> ?
+
+set incsearch
+"set hlsearch
+map  <F12> :set hls!<CR>
 
 "NAVIGATION ENTRE BUFFERS:
 
 nnoremap [ :w:bprev
 nnoremap ] :w:bnext
-
-nnoremap <C-F1> :w:b1
-nnoremap <C-F2> :w:b2
 
 "Enable MOUSE
 set mouse=a
@@ -53,19 +54,6 @@ set mouse=a
 set number
 "numerotation relative a ma position actuelle:
 "set relativenumber
-
-"Pour que le curseur soit toujours au milieu de la page:
-set scrolloff=10
-
-set incsearch
-"set hlsearch
-map  <F12> :set hls!<CR>
-" SEARCH:
-set incsearch
-"set hlsearch
-map  <F12> :set hls!<CR>
-nnoremap <SPACE> /
-nnoremap <SPACE><SPACE> ?
 
 set wrapscan
 
@@ -80,8 +68,6 @@ set autoindent
 let mapleader = "-"
 
 "resourcer en mode normal
-nnoremap <leader>sv :source $MYVIMRC
-"resourcer en mode normal:
 nnoremap <leader>sv :source ~/.vimrc<ENTER>
 "editer mon vimrc:
 nnoremap <leader>ev :split ~/.vimrc<ENTER>
@@ -89,30 +75,12 @@ nnoremap <leader>ev :split ~/.vimrc<ENTER>
 nnoremap [1;5A :resize +5
 nnoremap [1;5B :resize -5
 
-"remapper esc:
-inoremap kj <esc>
-
-"remapper enter pour le mode normal:
-nnoremap  eBi
 
 "effacer un mot en appuyant sur delete (meme si je ne suis qu'au milieu)
 nnoremap [3~ bdw 
-
-"effacer le dernier caractere de la ligne
-nnoremap <leader>d ml$x`l
-
-vnoremap > >gv
-vnoremap < <gv
-
-
-"effacer un mot en appuyant sur delete (meme si je ne suis qu'au milieu)
-nnoremap [3~ bdw 
-
-"pour commenter en mode visuel mais en gardant la selection:
-vnoremap > >gv
-vnoremap < <gv
 
 "---- COMMENTAIRES -----:
+
 "em bash,
 autocmd filetype bash nnoremap OR :s/^/#/<c-m>
 autocmd filetype bash vnoremap OR :s/^/#/<c-m>gv
@@ -136,24 +104,24 @@ autocmd FileType python vnoremap OS :s/^#//<C-M>gv
 autocmd FileType python nnoremap OR :s/^/#/<C-M>
 autocmd FileType python nnoremap OS :s/^#//<C-M>
 
+" ----------------------------
 "----- Mappings LATEX --------
+"-----------------------------
 
 "CA SERAIT BIEN DE CREER DES GROUPES pour les autocommands
 
 "Compiler SM-book.tex:
-"nnoremap <C-L> :w<ENTER>:!pdflatex --shell-escape SM-book.tex <ENTER>
-"Compiler SM-book.tex:
+nnoremap <C-L> :w<ENTER>:!pdflatex --shell-escape SM-book.tex <ENTER>
+"Compiler Apostila.tex:
 "nnoremap <C-L> :w<ENTER>:!pdflatex Apostila.tex <ENTER>
-"Compiler le fichier actuel:
-nnoremap <C-L> :w<ENTER>:!pdflatex % <ENTER>
+"Compiler le fichier actuel
+"noremap <C-L> :w<ENTER>:!pdflatex % <ENTER>
 
 "copier ce qui se trouve dans le $...$ le plus proche:
 autocmd filetype tex nnoremap Y mof$lyt$`o
 
 "commencer un environnement
 autocmd filetype tex nnoremap <C-B> i\begin{
-"----- LATEX --------
-
 
 "EMPHASIZER en mode VISUEL
 vnoremap e <ESC>`>a}<ESC>`<i\emph{<ESC>
@@ -168,14 +136,9 @@ autocmd filetype tex nnoremap  mo/label<ENTER>e2l"oyi{`o
 "coller le contenu du registre o dans un \eqref{...}:
 autocmd filetype tex inoremap  {}<ESC>"oP  
 
-"Para completar um ambiente (tipo fechar \begin{equation}):
+" EQUATIONS:
 " En mode inserer: je suis genre a \begin{equation_, et je 
 " veux completer:
-autocmd filetype tex inoremap <C-E> }yT{oo\end{pa}2kA\label{}i
-" En mode normal, je veux juste fermer un ambiente:
-autocmd filetype tex nnoremap <C-E> i\end<ESC>mz?\\begin<ENTER>2wy%`zp 
-
-" EQUATIONS:
 autocmd filetype tex inoremap <C-E> }yT{oo\end{pa}2kAji
 " En mode normal, je veux juste fermer un ambiente:
 autocmd filetype tex nnoremap <C-E> i\end<ESC>mz?\\begin<ENTER>2wy%`zp 
@@ -220,21 +183,14 @@ nnoremap <leader>en i\begin{enumerate}\end{enumerate}ki\item
 "pour mettre un item
 nnoremap <leader>it i\item 
 
-"Para fazer um FOLD com a imagem na qual o cursor esta:
-nnoremap [20~ ?begin{tikzpicture}zf/end{tikzpicture}
-"OBS: le defaut est que le /end{tikzpicture} est enregistre comme
-" le "search" courant, et donc si ensuite 
-"jútilise les touches n et N, il me
-"recherche un "end{tikzpicture}"...
 "Trocar um \[...\] por \begin{equation}...\end{equation}:
 autocmd filetype tex nnoremap ** /\\]<enter>2xa\end{equation}<esc>?\\[<enter>2xi\begin{equation}\label{}<esc>i
+"Trocar um \[...\] por um \begin{align*}...\end{align*}
+autocmd filetype tex nnoremap ## mp?\\[<enter>2xi\begin{align*}<esc>/\\]<enter>2xi\end{align*}<esc>`p
 "Trocar um $...$ por um \[...\]:
 autocmd filetype tex nnoremap && F$xi<ENTER>\[<ENTER><ESC>f$s<ENTER>\]<ESC>k
 
 " Les fonctions qui me stockent la session quand je ferme vim:
-autocmd VimEnter * call LoadSession()
-autocmd VimLeave * call SaveSession()
-
 function! SaveSession()
   execute 'mksession! $HOME/.vim/sessions/session.vim'
 endfunction
@@ -245,25 +201,6 @@ function! LoadSession()
   endif
 endfunction
 
-"ma recherche des intervales ouverts et fermes:
-":%s_\]\(.*\),\(.*\)\[_(\1,\2)_
-"mieux:
-"%s_[\]\[][^\$]*,[^\$]*[\]\[]_ff_c
-"et qui marche:
-
-":%s_\]\([^\$]*\),\([^\$]*\)\[_(\1,\2)_gc
-
-" Le script qui insere la date au debut du fichier:
-autocmd FileWritePre *.tex mark s|call MyLastMod()|'s
-"il faudrait que l'action de MyLastMod soit pas undoable...
-"(on s'en rend compte a mesure qu'on sauve, compile, corrige, etc.)
-fun! MyLastMod()
-let currenttime = strftime("%c")
-"exe "1Gisalut"
-exe "1,10s/modification: .*/modification: " . currenttime
-exe "1,10s/modification:/modification: " . currenttime
-"ici faudrait inserer un teste qui regarde si cette ligne existe.
-"si elle n'existe pas, la creer.
-"1GiLast Modification
-endfun
+autocmd VimEnter * call LoadSession()
+autocmd VimLeave * call SaveSession()
 
