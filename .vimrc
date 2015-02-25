@@ -114,18 +114,21 @@ autocmd FileType python nnoremap OS :s/^#//<C-M>
 " un truc qui commencait a marcher, en ligne de commande:
 " :execute "nnoremap <C-L> :nnoremap h D<enter>"
 " para SMbook:
-nnoremap <leader>sm execute 'nnoremap <C-L> :w<ENTER>:!pdflatex --shell-escape SM-book.tex <ENTER>'
+" MARCHE PAS ENCORE:
+"nnoremap <leader>sm execute 'nnoremap <C-L> :w<ENTER>:!pdflatex --shell-escape SM-book.tex <ENTER>'
 " execute 'mksession! $HOME/.vim/sessions/session.vim'
+nnoremap <C-L> :w<ENTER>:!pdflatex --shell-escape SM-book.tex <ENTER>
 " para Apostila:
-nnoremap <leader>ap :nnoremap <C-L> :w<ENTER>:!pdflatex Apostila.tex <ENTER>
+"nnoremap <C-L> :w<ENTER>:!pdflatex Apostila.tex <ENTER>
 " para fichier actuel:
-nnoremap <leader>at :nnoremap <C-L> :w<ENTER>:!pdflatex % <ENTER>
+"nnoremap <C-L> :w<ENTER>:!pdflatex % <ENTER>
 
 "copier ce qui se trouve dans le $...$ le plus proche:
 autocmd filetype tex nnoremap Y mof$lyt$`o
 
 "commencer un environnement
 autocmd filetype tex nnoremap <C-B> i\begin{
+
 
 "EMPHASIZER en mode VISUEL
 vnoremap e <ESC>`>a}<ESC>`<i\emph{<ESC>
