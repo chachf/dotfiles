@@ -1,6 +1,5 @@
-" GENERAL:
-
 colorscheme vitamins 
+
 "colorscheme desert 
 
 "set cursorline
@@ -104,6 +103,10 @@ autocmd FileType python vnoremap OS :s/^#//<C-M>gv
 autocmd FileType python nnoremap OR :s/^/#/<C-M>
 autocmd FileType python nnoremap OS :s/^#//<C-M>
 
+"---- PASTE -----
+nnoremap [15~ :set paste
+nnoremap [17~ :set nopaste
+
 " ----------------------------
 "----- Mappings LATEX --------
 "-----------------------------
@@ -114,9 +117,6 @@ autocmd FileType python nnoremap OS :s/^#//<C-M>
 " un truc qui commencait a marcher, en ligne de commande:
 " :execute "nnoremap <C-L> :nnoremap h D<enter>"
 " para SMbook:
-" MARCHE PAS ENCORE:
-"nnoremap <leader>sm execute 'nnoremap <C-L> :w<ENTER>:!pdflatex --shell-escape SM-book.tex <ENTER>'
-" execute 'mksession! $HOME/.vim/sessions/session.vim'
 nnoremap <C-L> :w<ENTER>:!pdflatex --shell-escape SM-book.tex <ENTER>
 " para Apostila:
 "nnoremap <C-L> :w<ENTER>:!pdflatex Apostila.tex <ENTER>
@@ -154,7 +154,9 @@ autocmd filetype tex nnoremap <C-E> i\end<ESC>mz?\\begin<ENTER>2wy%`zp
 
 "commencer un environnement
 autocmd filetype tex nnoremap <C-B> i\begin{
+autocmd filetype tex inoremap $$ \(\)<ESC>hi
 
+"iabbrev $$ \(\)<ESC>hi
 iabbrev eqn \[<ENTER><ENTER>\]<ESC>ki<BS>
 iabbrev Eqn \begin{equation}\label{}<ENTER><ENTER>\end{equation}<ESC>kk$i<BS>
 iabbrev algn \begin{align*}\end{align*}ki

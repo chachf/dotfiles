@@ -122,4 +122,15 @@ export PS1
 
 alias 'gitlog'='git log --pretty=format:"%an | %ad | %s"'
  
+# Apres ces problemes de texlive (il ne reconnaissait plus
+# \declaretheoremstyle), j'ai reinstalle texlive en suivant
+# les indications donnees sur:
+#http://askubuntu.com/questions/486170/upgrade-from-tex-live-from-2013-to-2014-on-ubuntu-14-04
+# La ils disent de rajouter ces lignes:
+TEXDIR="/usr/local/texlive/2014"
+#export PATH=$TEXDIR/bin/i386-linux:$PATH    # for 32-bit installation
+export PATH=$TEXDIR/bin/x86_64-linux:$PATH  # for 64-bit installation
+export INFOPATH=$INFOPATH:$TEXDIR/texmf-dist/doc/info
+export MANPATH=$MANPATH:$TEXDIR/texmf-dist/doc/man
+
 
